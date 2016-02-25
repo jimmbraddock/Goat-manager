@@ -14,6 +14,7 @@ from pyramid.scripts.common import parse_vars
 from ..models.meta import DBSession, Base
 from ..models import Goat
 
+
 def usage(argv):
     cmd = os.path.basename(argv[0])
     print('usage: %s <config_uri> [var=value]\n'
@@ -32,5 +33,5 @@ def main(argv=sys.argv):
     DBSession.configure(bind=engine)
     Base.metadata.create_all(engine)
     with transaction.manager:
-        admin = Goat(name=u'admin', password=u'admin')
+        admin = Goat(name=u'admin', date_of_birth='12.12.2014', breed_id=1)
         DBSession.add(admin)

@@ -12,10 +12,12 @@ requires = [
     'pyramid',
     'pyramid_jinja2',
     'pyramid_debugtoolbar',
-    'waitress',
+    'pyramid_tm',
     'SQLAlchemy',
     'transaction',
     'zope.sqlalchemy',
+    'waitress',
+    'pymysql'
     ]
 
 setup(name='goat-database',
@@ -31,15 +33,16 @@ setup(name='goat-database',
       author='',
       author_email='',
       url='',
-      keywords='web pyramid pylons',
+      keywords='web wsgi bfg pylons pyramid',
       packages=find_packages(),
       include_package_data=True,
       zip_safe=False,
+      test_suite='goat_database',
       install_requires=requires,
-      tests_require=requires,
-      test_suite="goat_database",
       entry_points="""\
       [paste.app_factory]
       main = goat_database:main
+      [console_scripts]
+      initialize_goat-database_db = goat_database.scripts.initializedb:main
       """,
       )

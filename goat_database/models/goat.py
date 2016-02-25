@@ -1,17 +1,21 @@
-import datetime #<- will be used to set default dates on models
-from pyramid_blogr.models.meta import Base  #<- we need to import our sqlalchemy metadata from which model classes will inherit
+import datetime
+from goat_database.models.meta import Base
 from sqlalchemy import (
     Column,
     Integer,
-    Unicode,     #<- will provide Unicode field
-    UnicodeText, #<- will provide Unicode text field
-    DateTime,    #<- time abstraction field
+    Unicode,
+    UnicodeText,
+    DateTime,
     )
 
 
 class Goat(Base):
-    __tablename__ = 'users'
+    __tablename__ = 'goat'
     id = Column(Integer, primary_key=True)
-    name = Column(Unicode(255), unique=True, nullable=False)
-    password = Column(Unicode(255), nullable=False)
-    last_logged = Column(DateTime, default=datetime.datetime.utcnow)
+    name = Column(Unicode(255), nullable=False)
+    mother_id = Column(Integer, nullable=True)
+    father_id = Column(Integer, nullable=True)
+    gender_id = Column(Integer, nullable=True)
+    date_of_birth = Column(DateTime, nullable=False)
+    breed_id = Column(Integer, nullable=False)
+    birth_place = Column(UnicodeText, nullable=True)
