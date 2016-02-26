@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Козлятник</title>
+<link rel="stylesheet" type="text/css"
+	href="{{ request.static_url('goat_database:static/main.css') }}">
+</head>
+<body>
+	<div class="wrapper">
+		<div class="foo">
+			<ul>
+				<li><a href="{{ request.route_url('home') }}">Козы</a></li>
+			</ul>
+		</div>
+
+		<div class="main">
+			{% block content %}{% endblock %}
+		</div>
+
+
+		<div class="footer">&copy; Copyright 2016</div>
+	</div>
+</body>
+</html>

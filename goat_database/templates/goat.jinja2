@@ -1,0 +1,21 @@
+{% extends "goat_database:templates/layout.jinja2" %}
+
+{% block content %}
+    <table border="2px">
+        <caption>
+            {{ entry.name }}
+        </caption>
+        <tr>
+            <td>Место рождения</td>
+            <td>{{ entry.birth_place }}</td>
+        </tr>
+        <tr>
+            <td>Год рождения</td>
+            <td>{{ entry.date_of_birth }}</td>
+        </tr>
+        <tr>
+            <td>Порода</td>
+            <td>{{ entry.breed.breed_name }}</td>
+        </tr>
+    </table>
+{% endblock %}
