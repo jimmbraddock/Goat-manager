@@ -17,7 +17,8 @@ requires = [
     'transaction',
     'zope.sqlalchemy',
     'waitress',
-    'pymysql'
+    'pymysql',
+    'wtforms',
     ]
 
 setup(name='goat-database',

@@ -1,6 +1,6 @@
 import sqlalchemy as sa
 from ..meta import DBSession
-from ..goat import Goat
+from ..goat import Goat, Breed, Gender
 
 
 class GoatService:
@@ -12,3 +12,11 @@ class GoatService:
     @classmethod
     def by_id(cls, id):
         return DBSession.query(Goat).filter(Goat.id == id).first()
+
+    @classmethod
+    def all_breed(cls):
+        return DBSession.query(Breed).all()
+
+    @classmethod
+    def all_gender(cls):
+        return DBSession.query(Gender).all()

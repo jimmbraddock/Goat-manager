@@ -5,4 +5,5 @@
         <li><a href="{{ request.route_url('goat', id=item.id) }}">{{ item.name }}</a></li>
     {% endfor %}
     </ul>
+    <a href="{{ request.route_url('goat_action', action='create') }}">Создать</a>
 {% endblock %}
