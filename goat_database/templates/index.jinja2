@@ -1,9 +1,20 @@
 {% extends "goat_database:templates/layout.jinja2" %}
 
 {% block content %}
+    <table>
     {% for item in goats %}
-        <li><a href="{{ request.route_url('goat', id=item.id) }}">{{ item.name }}</a></li>
+        <tr>
+            <td>
+                {{ item.name }}
+            </td>
+            <td>
+                <a href="{{ request.route_url('goat_action', action='edit', _query={'id':item.id}) }}">Редактировать</a>
+            </td>
+            <td>
+                <a href="{{ request.route_url('goat_action', action='delete', _query={'id':item.id}) }}">Удалить</a>
+            </td>
+       </tr>
     {% endfor %}
-    </ul>
+    </table>
     <a href="{{ request.route_url('goat_action', action='create') }}">Создать</a>
 {% endblock %}

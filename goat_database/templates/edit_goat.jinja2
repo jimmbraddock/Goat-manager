@@ -31,21 +31,15 @@
 
     <div class="form-group">
         <label for="date_of_birth">{{ form.date_of_birth.label }}</label>
-        {{ form.date_of_birth(class_='form-control', name='date_of_birth') }}
+        <!-- type делаем пустым т.к. используем jQuery календарь, иначе в хроме
+             работает html5 календарь, а в лисе он не работает-->
+        {{ form.date_of_birth(class_='form-control', type='') }}
     </div>
-
-    {% for error in form.breed.errors %}
-        <div class="error">{{ error }}</div>
-    {% endfor %}
 
     <div class="form-group">
         <label for="breed">{{ form.breed.label }}</label>
         {{ form.breed(class_='form-control') }}
     </div>
-
-    {% for error in form.gender.errors %}
-        <div class="error">{{ error }}</div>
-    {% endfor %}
 
     <div class="form-group">
         <label for="gender">{{ form.gender.label }}</label>
@@ -54,7 +48,7 @@
 
     <div class="form-group">
         <label></label>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-default">Подтвердить</button>
     </div>
 
 </form>
