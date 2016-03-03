@@ -7,7 +7,7 @@ from sqlalchemy import (
     UnicodeText,
     DateTime,
     ForeignKey,
-    )
+)
 
 
 class Breed(Base):
@@ -28,8 +28,16 @@ class Goat(Base):
     __tablename__ = 'goat'
     id = Column(Integer, primary_key=True)
     name = Column(Unicode(255), nullable=False)
-    mother_id = Column(Integer, nullable=True)
-    father_id = Column(Integer, nullable=True)
+    mother_id = Column(Integer, ForeignKey('goat.id'), nullable=True)
+    mother = relationship('Goat',
+                          foreign_keys=[mother_id],
+                          remote_side=[id],
+                          backref='child_of_mother')
+    father_id = Column(Integer, ForeignKey('goat.id'), nullable=True)
+    father = relationship('Goat',
+                          foreign_keys=[father_id],
+                          remote_side=[id],
+                          backref='child_of_father')
     gender_id = Column(Integer, ForeignKey('gender.gender_id'), nullable=True)
     date_of_birth = Column(DateTime, nullable=False)
     breed_id = Column(Integer, ForeignKey('breed.breed_id'), nullable=False)

@@ -14,6 +14,14 @@ class GoatService:
         return DBSession.query(Goat).filter(Goat.id == id).first()
 
     @classmethod
+    def goats(cls):
+        return DBSession.query(Goat).filter(Goat.gender_id == 2).all()
+
+    @classmethod
+    def bucks(cls):
+        return DBSession.query(Goat).filter(Goat.gender_id == 1).all()
+
+    @classmethod
     def all_breed(cls):
         return DBSession.query(Breed).all()
 

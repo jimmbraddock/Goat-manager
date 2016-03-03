@@ -1,12 +1,12 @@
+import logging
+import transaction
 from pyramid.view import view_config
 from ..models.services.goat_service import GoatService
 from pyramid.httpexceptions import HTTPFound, HTTPNotFound
 from ..forms.forms import GoatCreateForm, GoatUpdateForm
 from ..models.meta import DBSession
 from ..models.goat import Goat
-import logging
-import datetime
-import transaction
+
 log = logging.getLogger(__name__)
 
 
@@ -27,10 +27,10 @@ def goat_create(request):
     form = GoatCreateForm(request.POST)
     form.breed.query_factory = GoatService.all_breed
     form.gender.query_factory = GoatService.all_gender
+    form.father.query_factory = GoatService.bucks
+    form.mother.query_factory = GoatService.goats
     if request.method == 'POST' and form.validate():
         form.populate_obj(entry)
-        entry.breed_id = form.breed.data.breed_id
-        entry.gender_id = form.gender.data.gender_id
         DBSession.add(entry)
         return HTTPFound(location=request.route_url('home'))
     return {'form': form, 'action': request.matchdict.get('action')}
@@ -46,14 +46,10 @@ def goat_update(request):
     form = GoatUpdateForm(request.POST, entry)
     form.breed.query_factory = GoatService.all_breed
     form.gender.query_factory = GoatService.all_gender
-    #form.date_of_birth.data = entry.date_of_birth.strftime('%d.%m.%Y')
+    form.father.query_factory = GoatService.bucks
+    form.mother.query_factory = GoatService.goats
     if request.method == 'POST' and form.validate():
-        log.debug('date_of_birth=%s', form.date_of_birth.data)
-        log.debug('date_of_birth=%s', entry.date_of_birth.strftime('%d.%m.%Y'))
-        #entry.date_of_birth = datetime.datetime.strptime(form.date_of_birth.data, '%d.%m.%Y')
         form.populate_obj(entry)
-        # DBSession.add(entry)
-        # transaction.commit()
         return HTTPFound(location=request.route_url('goat', id=entry.id))
     return {'form': form, 'action': request.matchdict.get('action')}
 
