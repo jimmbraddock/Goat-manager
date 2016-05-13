@@ -60,3 +60,7 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+
+goat_database/static/img/goat_photos/*
+!goat_database/static/img/goat_photos/default_goat.jpg
+.idea/

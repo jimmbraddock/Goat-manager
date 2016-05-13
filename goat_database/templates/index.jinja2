@@ -2,19 +2,27 @@
 
 {% block content %}
     <table>
-    {% for item in goats %}
-        <tr>
-            <td>
-                {{ item.name }}
-            </td>
-            <td>
-                <a href="{{ request.route_url('goat_action', action='edit', _query={'id':item.id}) }}">Редактировать</a>
-            </td>
-            <td>
-                <a href="{{ request.route_url('goat_action', action='delete', _query={'id':item.id}) }}">Удалить</a>
-            </td>
-       </tr>
-    {% endfor %}
+        {% for item in goats %}
+            <tr>
+                <td>
+                    <a href="{{ request.route_url('goat_action', action='edit', _query={'id':item.id}) }}">
+                        {% if item.photo_path %}
+                            <img src=" {{ request.static_url('goat_database:static/img/goat_photos/' + item.name + '/' + item.photo_path) }} "
+                                 height="70" width="70"/>
+                        {% else %}
+                            <img src=" {{ request.static_url('goat_database:static/img/goat_photos/default_goat.jpg') }} "
+                                 height="70" width="70"/>
+                        {% endif %}
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ request.route_url('goat_action', action='edit', _query={'id':item.id}) }}">{{ item.name }}</a>
+                </td>
+                <td>
+                    <a href="{{ request.route_url('goat_action', action='delete', _query={'id':item.id}) }}">Удалить</a>
+                </td>
+            </tr>
+        {% endfor %}
     </table>
     <a href="{{ request.route_url('goat_action', action='create') }}">Создать</a>
 {% endblock %}

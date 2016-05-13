@@ -42,3 +42,4 @@ class Goat(Base):
     date_of_birth = Column(DateTime, nullable=False)
     breed_id = Column(Integer, ForeignKey('breed.breed_id'), nullable=False)
     birth_place = Column(UnicodeText, nullable=True)
+    photo_path = Column(Unicode(1024), nullable=True)
